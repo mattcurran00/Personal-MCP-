@@ -1,5 +1,5 @@
 import asyncio
-from modelcall import call_model
+from modelcall import callmodel
 
 
 class CLIChat:
@@ -39,7 +39,7 @@ class CLIChat:
 
         # call_model sends the full history to Claude (with MCP tools available)
         # and returns Claude's final text reply.
-        response = await call_model(self.history)
+        response = await callmodel(self.history)
 
         # Record Claude's reply in history so the next turn has full context.
         self.history.append({"role": "assistant", "content": response})
