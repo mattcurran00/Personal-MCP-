@@ -1,0 +1,4 @@
+#ignore the compiled c cos there's gonna be so many of them
+*.exe
+#stop random vscode shit being pushed for some reason 
+*json
