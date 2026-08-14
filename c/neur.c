@@ -21,11 +21,9 @@ typedef struct{
  * a set of coordinates, origin and destination and the weighting
  */
 typedef struct{
-    i32 x;
-    i32 y;
-    i32 z;
-    struct Node* orig;
-    struct Node* dest;
+    i32 weight;
+    struct cd* orig;
+    struct cd* dest;
 }vect;
 
 /**
@@ -34,6 +32,7 @@ typedef struct{
 typedef struct{
     i32 x;
     i32 y;
+    i32 val;
 }cd;
 
 typedef struct{
@@ -51,6 +50,15 @@ int main (){
     Node* new = createNode(v);
 
     return 0;
+}
+
+cd* createPosPair(){
+
+    cd* newPair = (cd*)malloc(sizeof(cd));
+    newPair->val;
+    newPair->x;
+    newPair->y;
+    return newPair;
 }
 
 Node* createNode( i32 data){
