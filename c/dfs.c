@@ -18,7 +18,7 @@ struct Graph{
     struct List* array; //pointer to the structure List
 };
 
-struct Node* createNewNode(int data) {
+    struct Node* createNewNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data; //new structs data field is equals to data
     newNode->next = NULL; // since this is the newest one, we say there isnt a next. 

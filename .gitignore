@@ -2,3 +2,11 @@
 *.exe
 #stop random vscode shit being pushed for some reason 
 *json
+
+.vscode
+
+.venv
+
+.claude
+
+__pycache__

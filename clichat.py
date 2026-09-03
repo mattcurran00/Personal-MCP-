@@ -1,4 +1,5 @@
 import asyncio
+from fastmcp import Client
 from modelcall import callmodel
 
 
@@ -13,21 +14,24 @@ class CLIChat:
         print("CLI Chat (MCP-powered)")
         print("/exit to quit")
 
-        while self.running:
-            try:
-                message = input("You > ").strip()
+        # Open the MCP server once for the whole session so the FastMCP
+        # banner only prints on startup, not on every message.
+        async with Client("server.py") as mcpClient:
+            while self.running:
+                try:
+                    message = input("You > ").strip()
 
-                if not message:
-                    continue
+                    if not message:
+                        continue
 
-                await self.handle_message(message)
+                    await self.handle_message(message, mcpClient)
 
-            except KeyboardInterrupt:
-                print("\nUse /exit to quit.")
+                except KeyboardInterrupt:
+                    print("\nUse /exit to quit.")
 
         print("Goodbye")
 
-    async def handle_message(self, message: str) -> None:
+    async def handle_message(self, message: str, mcpClient: Client) -> None:
         if message == "/exit":
             self.running = False
             return
@@ -39,7 +43,7 @@ class CLIChat:
 
         # call_model sends the full history to Claude (with MCP tools available)
         # and returns Claude's final text reply.
-        response = await callmodel(self.history)
+        response = await callmodel(self.history, mcpClient)
 
         # Record Claude's reply in history so the next turn has full context.
         self.history.append({"role": "assistant", "content": response})
